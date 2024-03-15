@@ -16,6 +16,14 @@ pip_repositories()
 
 load("@rules_python//python:pip.bzl", "pip_import")
 
+http_archive(
+    name = "com_google_protobuf",
+    strip_prefix = "protobuf-{}".format(PROTOBUF_VERSION),
+    url = "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v3.20.1.tar.gz",
+)
+
+load("@rules_python//python:repositories.bzl", "py_repositories")
+
 # This rule translates the specified requirements.txt into
 # @my_deps//:requirements.bzl, which itself exposes a pip_install method.
 pip_import(
